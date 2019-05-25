@@ -28,6 +28,7 @@ $factory->define(App\Good::class, function (Faker\Generator $faker) {
         'lioness.jpg', 'nice_view.jpg', 'river-between.jpg', 'tiger.jpg',
         'tomato_pair.jpg', 'x-mas_balls.jpg'
     ];
+    $categories = ['books', 'clothes'];
 
     return [
         'user_id' => $faker->numberBetween(1,2),
@@ -35,6 +36,7 @@ $factory->define(App\Good::class, function (Faker\Generator $faker) {
         'description' => $faker->paragraph(rand(2,3), true),
         'price_range_min' => $faker->numberBetween(50, 10000),
         'price_range_max' => $faker->numberBetween(100, 20000),
-        'image_file_name' => $imgFileNames[rand(0, count($imgFileNames)-1)]
+        'image_file_name' => $imgFileNames[rand(0, count($imgFileNames)-1)],
+        'category' => $categories[rand(0, count($categories) - 1)]
     ];
 });
