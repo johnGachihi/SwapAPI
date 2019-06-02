@@ -21,6 +21,7 @@ $router->get('/', function () use ($router) {
 $router->get('goods', 'GoodsController@all');
 $router->get('goods/{id}', 'GoodsController@get');
 $router->get('goods/paged', 'GoodsController@allPaged');
+$router->get('goods/find', 'GoodsController@findGoods');
 $router->post('goods', 'GoodsController@add');
 $router->put('goods/{id}', 'GoodsController@put');
 $router->delete('goods/{id}', 'GoodsController@remove');
