@@ -12,9 +12,12 @@ class Good extends Model {
         // Validation rules
     ];
 
-    public function User()
-    {
+    public function User(){
         return $this->belongsTo("App\User");
+    }
+
+    public function supplementaryGoodImages() {
+        return $this->hasMany('App\SupplementaryGoodImage');
     }
 
 

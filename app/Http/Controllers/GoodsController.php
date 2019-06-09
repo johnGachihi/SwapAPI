@@ -15,11 +15,23 @@ class GoodsController extends Controller {
 
     public function allPaged(Request $request) {
         $category = $request->input('category');
+        $paginator = null;
+
         if($category) {
-            return Good::with('user')
-                ->where('category', '=', $category)->paginate();
+            $paginator = Good::with('user')
+                ->where('category', '=', $category)
+                ->paginate();
+        } else {
+            $paginator = Good::with('user')
+                ->paginate();
         }
-        return Good::with('user')->paginate();
+
+        $paginator->getCollection()->transform(function ($good) {
+            $good['supplementary_good_images'] = $good->supplementaryGoodImages()->pluck('image_filename');
+            return $good;
+        });
+
+        return $paginator;
     }
 
     public function findGoods(Request $request) {
@@ -33,7 +45,7 @@ class GoodsController extends Controller {
         Log::info("------------->" . $category);
 
         if($category) {
-            return Good::with('user')
+            return Good::with(['user', 'supplementaryGoodImages'])
                 ->where('category', '=', $category)
                 ->where(function ($query) use ($searchQuery) {
                     $query->where('name', 'like', "%$searchQuery%")
@@ -42,7 +54,7 @@ class GoodsController extends Controller {
 
                 ->paginate();
         } else {
-            return Good::with('user')
+            return Good::with(['user', 'supplementaryGoodImages'])
                 ->where('name', 'like', "%$searchQuery%")
                 ->orWhere('description', 'like', "%$searchQuery%")
                 ->paginate();

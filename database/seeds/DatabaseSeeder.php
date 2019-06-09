@@ -11,8 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call([
-//             'GoodsTableSeeder'
-         ]);
+        /*USE php artisan db:seed --class=<the-seeder-class>
+          INSTEAD OF THIS CLASS.
+        */
+         $this->call([]);
     }
 }

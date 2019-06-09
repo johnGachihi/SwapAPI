@@ -40,3 +40,15 @@ $factory->define(App\Good::class, function (Faker\Generator $faker) {
         'category' => $categories[rand(0, count($categories) - 1)]
     ];
 });
+
+$factory->define(App\SupplementaryGoodImage::class, function (Faker\Generator $faker) {
+    $imgFileNames = [
+        'certain_flower.jpg', 'eiffel_tower.jpg', 'horns.jpg',
+        'lioness.jpg', 'nice_view.jpg', 'river-between.jpg', 'tiger.jpg',
+        'tomato_pair.jpg', 'x-mas_balls.jpg'
+    ];
+
+    return [
+        'image_filename' => $imgFileNames[$faker->numberBetween(0, count($imgFileNames)-1)]
+    ];
+});

@@ -11,6 +11,11 @@ class GoodsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Good::class, 500)->create();
+        factory(App\Good::class, 500)->create()
+            ->each(function ($good) {
+                for($i = 0; $i <=5; $i++) {
+                    $good->supplementaryGoodImages()->save(factory(App\SupplementaryGoodImage::class)->make());
+                }
+            });
     }
 }
