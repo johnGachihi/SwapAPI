@@ -63,13 +63,15 @@ class GoodsController extends Controller {
     }
 
     public function add(Request $request) {
-        $request->validate([
-            'category' => 'required',
-            'name' => 'required',
-            'description' => 'required',
-            'location' => 'required',
-            'price_estimate' => 'required'
-        ]);
+        // $request->validate([
+        //     'category' => 'required',
+        //     'name' => 'required',
+        //     'description' => 'required',
+        //     'location' => 'required',
+        //     'price_estimate' => 'required'
+        // ]);
+
+        return response()->json(['name' => 'Mizzy']);
 
         $category = $request->input('category');
         $name = $request->input('name');
