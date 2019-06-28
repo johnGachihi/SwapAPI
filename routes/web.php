@@ -19,9 +19,12 @@ $router->get('/', function () use ($router) {
  * Routes for resource goods-controller
  */
 $router->get('goods', 'GoodsController@all');
-$router->get('goods/{id}', 'GoodsController@get');
 $router->get('goods/paged', 'GoodsController@allPaged');
 $router->get('goods/find', 'GoodsController@findGoods');
+$router->get('goods/{id}', 'GoodsController@get');
 $router->post('goods', 'GoodsController@add');
 $router->put('goods/{id}', 'GoodsController@put');
 $router->delete('goods/{id}', 'GoodsController@remove');
+
+
+Route::post('users', 'RegisterController@register');
