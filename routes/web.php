@@ -27,4 +27,6 @@ $router->put('goods/{id}', 'GoodsController@put');
 $router->delete('goods/{id}', 'GoodsController@remove');
 
 
-Route::post('users', 'RegisterController@register');
+$router->post('users', 'RegisterController@register');
+$router->post('auth/swap-sign-in', 'LoginController@login_with_swap');
+$router->post('auth/google-sign-in', 'LoginController@login_with_google_signin');
