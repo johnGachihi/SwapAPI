@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 class SupplementaryGoodImage extends Model
 {
 
+    protected $fillable = ['image_filename'];
+
     public function good() {
         return $this->belongsTo('App\Good');
     }
