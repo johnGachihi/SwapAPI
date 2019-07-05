@@ -41,3 +41,12 @@ $router->put("users/fcm-instance-id", 'UsersController@putFCMInstanceId');
 $router->delete("users/fcm-instance-id", "UsersController@removeFCMInstanceId");
 
 
+
+/**
+ * Routes for resource offers
+ */
+$app->get('offers', 'OffersController@all');
+$app->get('offers/{id}', 'OffersController@get');
+$app->post('offers', 'OffersController@add');
+$app->put('offers/{id}', 'OffersController@put');
+$app->delete('offers/{id}', 'OffersController@remove');

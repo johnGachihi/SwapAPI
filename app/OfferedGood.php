@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class OfferedGoods extends Model {
+class OfferedGood extends Model {
 
     protected $fillable = [];
 
@@ -13,7 +13,12 @@ class OfferedGoods extends Model {
     ];
 
     // Relationships
+
     public function offer() {
         return $this->belongsTo('App\Offer');
+    }
+
+    public function good() {
+        return $this->belongsTo('App\Good');
     }
 }

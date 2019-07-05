@@ -13,8 +13,13 @@ class Offer extends Model {
     ];
 
     // Relationships
+
     public function offered_goods() {
-        return $this->hasMany('App\OfferedGoods');
+        return $this->hasMany('App\OfferedGood');
+    }
+
+    public function good() {
+        return $this->belongsTo('App\Good', 'good_offered_for');
     }
 
 }
