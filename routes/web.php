@@ -26,7 +26,18 @@ $router->post('goods', 'GoodsController@add');
 $router->put('goods/{id}', 'GoodsController@put');
 $router->delete('goods/{id}', 'GoodsController@remove');
 
-
+/**
+ * Authentication
+ */
 $router->post('users', 'RegisterController@register');
 $router->post('auth/swap-sign-in', 'LoginController@login_with_swap');
 $router->post('auth/google-sign-in', 'LoginController@login_with_google_signin');
+
+/**
+ * Users
+ */
+$router->get('users/{id}/goods', 'UsersController@getUserGoods');
+$router->put("users/fcm-instance-id", 'UsersController@putFCMInstanceId');
+$router->delete("users/fcm-instance-id", "UsersController@removeFCMInstanceId");
+
+
