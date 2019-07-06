@@ -26,7 +26,9 @@ class AlterDescriptionInGoodsTable extends Migration
     public function down()
     {
         Schema::table('goods', function (Blueprint $table) {
-            $table->string('description')->change();
+//            $table->string('description')->change();
+//            $table->dropColumn('description');
+//            $table->string('description')->nullable();
         });
     }
 }

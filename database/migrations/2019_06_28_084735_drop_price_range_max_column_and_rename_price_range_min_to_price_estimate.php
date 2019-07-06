@@ -29,7 +29,7 @@ class DropPriceRangeMaxColumnAndRenamePriceRangeMinToPriceEstimate extends Migra
     public function down()
     {
         Schema::table('goods', function (Blueprint $table) {
-            $table->integer('price_range_min')->nullable();
+//            $table->integer('price_range_min')->nullable();
             DB::statement("ALTER table goods CHANGE price_estimate price_range_min int");
         });
     }
