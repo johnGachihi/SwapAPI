@@ -97,49 +97,7 @@ class GoodsController extends Controller {
             }
         }
 
-
-//        Log::error("Main image name: " . $request->main_image->hashName());
-//        $path = $request->main_image->store('Good-images');
-//        Log::error("Main image stored to: " . $path);
-
-        return Good::find(4096);
-        /*Log::error($request->input("name"));
-        Log::error($request->input("user_id"));
-
-        if($request->has('good_details')) {
-            Log::error('Has good details');
-        } else {
-            Log::error('Does not have good details');
-        }
-
-        if($request->has("main_image")) {
-            Log::error("khg". $request->main_image->getClientOriginalName());
-        }
-
-        if($request->has("sup_images")) {
-            Log::error("Sup images available");
-//            Log::error("Sup images[0]". $request->sup_images[0]);
-//            Log::error("klh". $request->sup_images->getClientOriginalName());
-            if($request->sup_images) {
-                Log::error('$image is not null');
-//                Log::error('Sup image'. $request->sup_images->getClientOriginalName());
-//                Log::error('Sup image'. $request->sup_images->getClientOriginalName());
-            } else {
-                Log::error('$image is not null');
-            }
-            foreach ($request->sup_images as $image) {
-                Log::error("klh". $image->getClientOriginalName());
-            }
-        } else {
-            Log::error("No Sup images available");
-        }*/
-
-
-//        $category = $request->input('category');
-//        $name = $request->input('name');
-//        $description = $request->input('description');
-//        $location = $request->input('location');
-//        $price_estimate = $request->input('price_estimate');
+        return $good;
     }
 
     private function storeImage(UploadedFile $uploadedFile): string {

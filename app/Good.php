@@ -20,5 +20,4 @@ class Good extends Model {
         return $this->hasMany('App\SupplementaryGoodImage');
     }
 
-
 }

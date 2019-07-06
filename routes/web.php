@@ -38,15 +38,15 @@ $router->post('auth/google-sign-in', 'LoginController@login_with_google_signin')
  */
 $router->get('users/{id}/goods', 'UsersController@getUserGoods');
 $router->put("users/fcm-instance-id", 'UsersController@putFCMInstanceId');
-$router->delete("users/fcm-instance-id", "UsersController@removeFCMInstanceId");
+$router->delete("users/{id}/fcm-instance-id", "UsersController@removeFCMInstanceId");
 
 
 
 /**
  * Routes for resource offers
  */
-$app->get('offers', 'OffersController@all');
-$app->get('offers/{id}', 'OffersController@get');
-$app->post('offers', 'OffersController@add');
-$app->put('offers/{id}', 'OffersController@put');
-$app->delete('offers/{id}', 'OffersController@remove');
+//$router->get('offers', 'OffersController@all');
+//$router->get('offers/{id}', 'OffersController@get');
+$router->post('offers', 'OffersController@add');
+//$router->put('offers/{id}', 'OffersController@put');
+//$router->delete('offers/{id}', 'OffersController@remove');

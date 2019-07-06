@@ -8,6 +8,8 @@ class Offer extends Model {
 
     protected $dates = [];
 
+    protected $with = ['offered_goods'];
+
     public static $rules = [
         // Validation rules
     ];

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OfferedGood extends Model {
 
-    protected $fillable = [];
+    protected $fillable = ['good_id'];
 
     protected $dates = [];
 

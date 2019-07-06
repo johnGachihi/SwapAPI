@@ -29,12 +29,8 @@ class UsersController extends Controller {
         ]);
     }
 
-    public function removeFCMInstanceId(Request $request) {
-        $this->validate($request, [
-            "user_id" => 'required'
-        ]);
-
-        $user = User::findOrFail($request->input("user_id"));
+    public function removeFCMInstanceId($id) {
+        $user = User::findOrFail($id);
         $user->fcm_instance_id = null;
         $user->save();
 
