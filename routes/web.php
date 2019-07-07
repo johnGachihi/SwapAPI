@@ -39,6 +39,7 @@ $router->post('auth/google-sign-in', 'LoginController@login_with_google_signin')
 $router->get('users/{id}/goods', 'UsersController@getUserGoods');
 $router->put("users/fcm-instance-id", 'UsersController@putFCMInstanceId');
 $router->delete("users/{id}/fcm-instance-id", "UsersController@removeFCMInstanceId");
+$router->get("users/{id}/offers", 'UsersController@getUserOffers');
 
 
 

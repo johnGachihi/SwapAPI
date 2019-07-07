@@ -79,6 +79,7 @@ class SendOfferNotificationJob
                     'body' => "An offer offer has been made for a product you posted: ". $this->offer->good()->first()->name,
                     'icon' => 'stock_ticker_update',
                     'color' => '#f45342',
+                    'click_action' => "com.johngachihi.example.swap.OFFERS_ACTIVITY"
                 ],
             ],
         ]);

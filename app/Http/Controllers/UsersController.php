@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Good;
+use App\Offer;
+use App\OfferedGood;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -40,4 +43,28 @@ class UsersController extends Controller {
         ]);
     }
 
+    /*THERE MUST BE A SIMPLER AND CLEANER WAY TO ACHIEVE ABOVE RESULT*/
+    public function getUserOffers($id) {
+        $user = User::find($id);
+        $offers = $user->goods()
+            ->join('offers', 'goods.id', '=', 'offers.good_offered_for')
+            ->select('offers.*')
+            ->get();
+
+        $offers->transform(function($offer) {
+            $offer['good_offered_for'] = Good::find($offer['good_offered_for']);
+            $offered_goods = OfferedGood::where('offer_id', $offer->id)->get();
+            $offer['offered_goods'] = $offered_goods->map(function ($offeredGood) {
+                return $offeredGood->good;
+            });
+            $good = Good::find($offered_goods->first()['good_id']);
+            $offer['bidder'] = null;
+            if($good) {
+                $offer['bidder'] = Good::find($offered_goods->first()['good_id'])->User;
+            }
+            return $offer;
+        });
+
+        return $offers;
+    }
 }

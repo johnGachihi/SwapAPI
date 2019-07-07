@@ -21,7 +21,7 @@ class OffersController extends Controller {
                 'good_id' => $offered_good
             ]);
         }
-//        SendOfferNotificationJob::dispatch($offer);
+
         dispatch(new SendOfferNotificationJob($offer));
         return $offer;
     }
