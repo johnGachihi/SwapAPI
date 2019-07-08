@@ -28,3 +28,4 @@ $router->delete('goods/{id}', 'GoodsController@remove');
 
 
 Route::post('users', 'RegisterController@register');
+Route::get('myaccount/{id}','UserController@myAccount');
