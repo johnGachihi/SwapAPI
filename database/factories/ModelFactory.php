@@ -14,6 +14,8 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'email' => $faker->email,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'password' => password_hash('1234', PASSWORD_DEFAULT)
     ];
 });
@@ -34,8 +36,8 @@ $factory->define(App\Good::class, function (Faker\Generator $faker) {
         'user_id' => $faker->numberBetween(1,2),
         'name' => $faker->sentence(rand(2, 4), true),
         'description' => $faker->paragraph(rand(2,3), true),
-        'price_range_min' => $faker->numberBetween(50, 10000),
-        'price_range_max' => $faker->numberBetween(100, 20000),
+        'price_estimate' => $faker->numberBetween(50, 10000),
+//        'price_range_max' => $faker->numberBetween(100, 20000),
         'image_file_name' => $imgFileNames[rand(0, count($imgFileNames)-1)],
         'category' => $categories[rand(0, count($categories) - 1)]
     ];

@@ -20,5 +20,8 @@ class Good extends Model {
         return $this->hasMany('App\SupplementaryGoodImage');
     }
 
+    public function offers() {
+        return $this->hasMany('App\Offer', 'good_offered_for');
+    }
 
 }

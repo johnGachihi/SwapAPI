@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Good;
+use App\SupplementaryGoodImage;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\UploadedFile;
+use App\User;
 
 class GoodsController extends Controller {
+
+    const IMAGES_PATH = 'Good-images';
 
     public function all() {
         return Good::all();
@@ -62,22 +67,49 @@ class GoodsController extends Controller {
 
     }
 
-    public function add(Request $request) {
-        // $request->validate([
-        //     'category' => 'required',
-        //     'name' => 'required',
-        //     'description' => 'required',
-        //     'location' => 'required',
-        //     'price_estimate' => 'required'
-        // ]);
+    public function add(Request $request)
+    {
+        $this->validate($request, [
+//            'name' => 'required',
+            /*'category' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'price_estimate' => 'required',
+            'main_image' => 'required'*/
+        ]);
 
-        return response()->json(['name' => 'Mizzy']);
+        $good = new Good();
 
-        $category = $request->input('category');
-        $name = $request->input('name');
-        $description = $request->input('description');
-        $location = $request->input('location');
-        $price_estimate = $request->input('price_estimate');
+        $good->name = $request->input('name');
+        $good->description = $request->input('description');
+        $good->category = $request->input('category');
+        $good->price_estimate = $request->input('price_estimate');
+//        $good->location = $request->input('location');  TO BE ADDED!!!
+        $good->user_id = $request->input('user_id');
+        $good->image_file_name = $this->storeImage($request->file('main_image'));
+        $good->save();
+
+        if($request->has('sup_images')) {
+            foreach ($request->sup_images as $image) {
+                $image_name = $this->storeImage($image);
+                $good->supplementaryGoodImages()->create([
+                    "image_filename" => $image_name
+                ]);
+            }
+        }
+
+        return $good;
+    }
+
+    private function storeImage(UploadedFile $uploadedFile): string {
+        $imageName = $uploadedFile->hashName();
+        $uploadedFile->store(self::IMAGES_PATH);
+
+        return $imageName;
+    }
+
+    public function get($id){
+        return User::find($id)->goods;
     }
 
 }

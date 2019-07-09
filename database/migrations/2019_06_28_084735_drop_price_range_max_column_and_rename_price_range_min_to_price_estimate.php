@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterDescriptionInGoodsTable extends Migration
+class DropPriceRangeMaxColumnAndRenamePriceRangeMinToPriceEstimate extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +15,9 @@ class AlterDescriptionInGoodsTable extends Migration
     public function up()
     {
         Schema::table('goods', function (Blueprint $table) {
-            $table->mediumText('description')->change();
+            $table->dropColumn('price_range_max');
+//            $table->renameColumn('price_range_min', 'price_estimate');
+            DB::statement("ALTER table goods CHANGE price_range_min price_estimate int");
         });
     }
 
@@ -26,9 +29,8 @@ class AlterDescriptionInGoodsTable extends Migration
     public function down()
     {
         Schema::table('goods', function (Blueprint $table) {
-//            $table->string('description')->change();
-//            $table->dropColumn('description');
-//            $table->string('description')->nullable();
+//            $table->integer('price_range_min')->nullable();
+            DB::statement("ALTER table goods CHANGE price_estimate price_range_min int");
         });
     }
 }

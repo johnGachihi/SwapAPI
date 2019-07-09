@@ -19,21 +19,23 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $myuser = new User();
-        // $myuser->first_name = $request->input('firstname');
-        // $myuser->last_name = $request->input('lastname');
-        // $myuser->email = $request->input('email');
-        // $myuser->password = $request->input('password');
-        $myuser->first_name = 'ble';
-        $myuser->last_name = 'ble';
-        $myuser->email = 'ble';
-        $myuser->password = 'ble';
-        $myuser->save();
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required'
+        ]);
+        $user = new User();
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->save();
 
         // return $myuser->with('message','Account successfully created');
         return response()->json([
             'error' => false,
-            'user' => $myuser
+            'user' => $user
         ]);
 
     }

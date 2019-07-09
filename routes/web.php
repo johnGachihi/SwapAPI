@@ -26,6 +26,31 @@ $router->post('goods', 'GoodsController@add');
 $router->put('goods/{id}', 'GoodsController@put');
 $router->delete('goods/{id}', 'GoodsController@remove');
 
+/**
+ * Authentication
+ */
+$router->post('users', 'RegisterController@register');
+$router->post('auth/swap-sign-in', 'LoginController@login_with_swap');
+$router->post('auth/google-sign-in', 'LoginController@login_with_google_signin');
+
+/**
+ * Users
+ */
+$router->get('users/{id}/goods', 'UsersController@getUserGoods');
+$router->get('users/{id}/goods/paged', 'UserController@getUserGoods'); //New
+$router->put("users/fcm-instance-id", 'UsersController@putFCMInstanceId');
+$router->delete("users/{id}/fcm-instance-id", "UsersController@removeFCMInstanceId");
+$router->get("users/{id}/offers", 'UsersController@getUserOffers');
 
 Route::post('users', 'RegisterController@register');
 Route::get('myaccount/{id}','UserController@myAccount');
+
+
+/**
+ * Routes for resource offers
+ */
+//$router->get('offers', 'OffersController@all');
+//$router->get('offers/{id}', 'OffersController@get');
+$router->post('offers', 'OffersController@add');
+//$router->put('offers/{id}', 'OffersController@put');
+//$router->delete('offers/{id}', 'OffersController@remove');
