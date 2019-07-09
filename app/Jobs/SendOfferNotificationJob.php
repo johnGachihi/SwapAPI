@@ -61,27 +61,29 @@ class SendOfferNotificationJob
 //        $message->withNotification($notification);
 //        $message->withAndroidConfig($androidConfig);
 
-        $this->messaging->send([
-            'token' => $to_user->fcm_instance_id,
-            'notification' => [
-                'title' => "Swap Offer",
-                'body' => "An offer offer has been made for a product you posted: ". $this->offer->good()->first()->name,
-            ],
-            'data' => [
-                'key_1' => 'Value 1',
-                'key_2' => 'Value 2',
-            ],
-            'android' => [
-                'ttl' => '3600s',
-                'priority' => 'normal',
+        if($to_user->fcm_instance_id) {
+            $this->messaging->send([
+                'token' => $to_user->fcm_instance_id,
                 'notification' => [
                     'title' => "Swap Offer",
-                    'body' => "An offer offer has been made for a product you posted: ". $this->offer->good()->first()->name,
-                    'icon' => 'stock_ticker_update',
-                    'color' => '#f45342',
-                    'click_action' => "com.johngachihi.example.swap.OFFERS_ACTIVITY"
+                    'body' => "An offer offer has been made for a product you posted: " . $this->offer->good()->first()->name,
                 ],
-            ],
-        ]);
+                'data' => [
+                    'key_1' => 'Value 1',
+                    'key_2' => 'Value 2',
+                ],
+                'android' => [
+                    'ttl' => '3600s',
+                    'priority' => 'normal',
+                    'notification' => [
+                        'title' => "Swap Offer",
+                        'body' => "An offer offer has been made for a product you posted: " . $this->offer->good()->first()->name,
+                        'icon' => 'stock_ticker_update',
+                        'color' => '#f45342',
+                        'click_action' => "com.johngachihi.example.swap.OFFERS_ACTIVITY"
+                    ],
+                ],
+            ]);
+        }
     }
 }
