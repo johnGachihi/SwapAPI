@@ -24,10 +24,12 @@ class GoodsController extends Controller {
 
         if($category) {
             $paginator = Good::with('user')
+                ->orderBy('id'  , 'desc')
                 ->where('category', '=', $category)
                 ->paginate();
         } else {
             $paginator = Good::with('user')
+                ->orderBy('id', 'desc')
                 ->paginate();
         }
 

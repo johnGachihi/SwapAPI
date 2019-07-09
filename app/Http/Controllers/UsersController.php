@@ -49,13 +49,19 @@ class UsersController extends Controller {
         $offers = $user->goods()
             ->join('offers', 'goods.id', '=', 'offers.good_offered_for')
             ->select('offers.*')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $offers->transform(function($offer) {
             $offer['good_offered_for'] = Good::find($offer['good_offered_for']);
+//            $offer['good_offered_for']['supplementary_good_images'] =
+//                $offer['good_offered_for']->supplementaryGoodImages()->pluck('image_filename');
+//            $wanted_good = Good::find($offer['good_offered_for']);
             $offered_goods = OfferedGood::where('offer_id', $offer->id)->get();
             $offer['offered_goods'] = $offered_goods->map(function ($offeredGood) {
-                return $offeredGood->good;
+                $good = $offeredGood->good;
+                $good["supplementary_good_images"] = $good->supplementaryGoodImages()->pluck('image_filename');
+                return $good;
             });
             $good = Good::find($offered_goods->first()['good_id']);
             $offer['bidder'] = null;
